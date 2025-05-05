@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sewing - MM. Leather Services</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Times New Roman', Times, serif;
+    }
+    
+    body {
+        background-color: #F7F7F2;
+        color: #000;
+        min-height: 100vh;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 15px;
+    }
+    
+    .navbar {
+        display: flex;
+        height: 45px;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #E5E5E0;
+        padding: 15px 30px;
+        border-radius: 15px;
+        margin-bottom: 30px;
+    }
+    
+    .navbar-brand {
+        font-size: 22px;
+        font-weight: normal;
+        text-align: center;
+        flex: 1;
+    }
+    
+    .navbar-left, .navbar-right {
+        flex: 1;
+    }
+    
+    .navbar-right {
+        display: flex;
+        justify-content: flex-end;
+        gap: 20px;
+    }
+    
+    .nav-link {
+        text-decoration: none;
+        color: #000;
+        font-size: 18px;
+        position: relative;
+    }
+    
+    .bag-count {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        background-color: #000;
+        color: #fff;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+    }
+    
+    .product-container {
+        display: flex;
+        justify-content: space-between;
+        gap: 50px;
+        margin-bottom: 50px;
+    }
+    
+    .product-image {
+        width: 45%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .product-image img {
+        width: 50%;
+        border-radius: 15px;
+    }
+    
+    .product-details {
+        width: 45%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .product-title {
+        font-size: 72px;
+        font-weight: normal;
+        margin-bottom: 10px;
+    }
+    
+    .product-price {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    
+    .shipping-section {
+        margin-bottom: 20px;
+    }
+    
+    .shipping-label {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+    
+    .shipping-option {
+        background-color: #E5E5E0;
+        padding: 12px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        width: 400px;
+        max-width: 100%;
+    }
+    
+    .shipping-option:hover {
+        background-color: #D5D5D0;
+    }
+    
+    .quantity-section {
+        margin-bottom: 20px;
+    }
+    
+    .quantity-label {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+    
+    .quantity-controls {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .quantity-btn {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: #E5E5E0;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        cursor: pointer;
+    }
+    
+    .quantity-btn:hover {
+        background-color: #D5D5D0;
+    }
+    
+    .add-to-cart-btn {
+        background-color: #000;
+        color: #fff;
+        border: none;
+        padding: 15px;
+        border-radius: 8px;
+        width: 400px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 10px;
+        text-align: center;
+    }
+    
+    .add-to-cart-btn:hover {
+        background-color: #333;
+    }
+    
+    .toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #333;
+        color: white;
+        padding: 15px 25px;
+        border-radius: 5px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 1000;
+    }
+    
+    .toast.show {
+        opacity: 1;
+    }
+    
+    .footer {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 50px;
+        padding: 20px 0;
+        text-align: center;
+    }
+    
+    .footer-link {
+        text-decoration: none;
+        color: #000;
+        font-size: 16px;
+    }
+    
+    @media (max-width: 768px) {
+        .navbar {
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .navbar-right {
+            justify-content: center;
+        }
+        
+        .product-container {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .product-image, .product-details {
+            width: 100%;
+        }
+        
+        .product-title {
+            font-size: 48px;
+            text-align: center;
+        }
+        
+        .product-price {
+            text-align: center;
+        }
+        
+        .footer {
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+    }
+</style>
+</head>
+<body>
+<div class="toast" id="toast">Item added to bag</div>
+
+<nav class="navbar">
+    <div class="navbar-left">
+        <a href="index.html" class="nav-link">Services</a>
+    </div>
+    <div class="navbar-brand">MM. Leather Services</div>
+    <div class="navbar-right">
+        <a href="#" class="nav-link">Account</a>
+        <a href="Bag.html" class="nav-link" id="bag-link">Bag<span class="bag-count" id="bag-count"></span></a>
+    </div>
+</nav>
+
+<div class="product-container">
+    <div class="product-image">
+        <img src="service2.png" alt="Sewing service" id="product-image">
+    </div>
+    
+    <div class="product-details">
+        <h1 class="product-title" id="product-title">Sewing</h1>
+        <p class="product-price" id="product-price">500php</p>
+        
+        <div class="shipping-section">
+            <p class="shipping-label">Shipping</p>
+            <div class="shipping-option">
+                I'll ship them to you (Manual Shipping to Location)
+            </div>
+            <div class="shipping-option">
+                Pick a Courier (Door Pick-up)
+            </div>
+        </div>
+        
+        <div class="quantity-section">
+            <p class="quantity-label">Quantity</p>
+            <div class="quantity-controls">
+                <button class="quantity-btn" onclick="decrementQuantity()">-</button>
+                <span id="quantity">1</span>
+                <button class="quantity-btn" onclick="incrementQuantity()">+</button>
+            </div>
+        </div>
+        
+        <button class="add-to-cart-btn" onclick="addToCart()">ADD TO BAG</button>
+    </div>
+</div>
+
+<footer class="footer">
+    <a href="#" class="footer-link">ABOUT</a>
+    <a href="#" class="footer-link">CONTACT</a>
+    <a href="#" class="footer-link">SOCIALS</a>
+    <a href="#" class="footer-link">FAQs</a>
+</footer>
+
+<script>
+    function updateBagCount() {
+        const bagCountElement = document.getElementById('bag-count');
+        const cart = JSON.parse(localStorage.getItem('mmLeatherCart')) || [];
+        
+        let totalItems = 0;
+        cart.forEach(item => {
+            totalItems += item.quantity;
+        });
+        
+        if (totalItems > 0) {
+            bagCountElement.textContent = totalItems;
+            bagCountElement.style.display = 'flex';
+        } else {
+            bagCountElement.style.display = 'none';
+        }
+    }
+    
+    function decrementQuantity() {
+        const quantityElement = document.getElementById('quantity');
+        let quantity = parseInt(quantityElement.textContent);
+        if (quantity > 1) {
+            quantityElement.textContent = quantity - 1;
+        }
+    }
+    
+    function incrementQuantity() {
+        const quantityElement = document.getElementById('quantity');
+        let quantity = parseInt(quantityElement.textContent);
+        quantityElement.textContent = quantity + 1;
+    }
+    
+    function addToCart() {
+        const title = document.getElementById('product-title').textContent;
+        const price = document.getElementById('product-price').textContent;
+        const priceValue = parseInt(price.replace('php', ''));
+        const quantity = parseInt(document.getElementById('quantity').textContent);
+        const imageSrc = document.getElementById('product-image').src;
+        
+        let cart = JSON.parse(localStorage.getItem('mmLeatherCart')) || [];
+        
+        const existingItemIndex = cart.findIndex(item => item.title === title);
+        
+        if (existingItemIndex !== -1) {
+            cart[existingItemIndex].quantity += quantity;
+        } else {
+            cart.push({
+                title: title,
+                price: priceValue,
+                quantity: quantity,
+                imageSrc: imageSrc
+            });
+        }
+        
+        localStorage.setItem('mmLeatherCart', JSON.stringify(cart));
+        updateBagCount();
+        
+        const toast = document.getElementById('toast');
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+    
+    window.addEventListener('DOMContentLoaded', updateBagCount);
+    window.addEventListener('storage', updateBagCount);
+</script>
+</body>
+</html>

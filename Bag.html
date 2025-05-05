@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bag - MM. Leather Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        body {
+            background-color: #F7F7F2;
+            color: #000;
+            min-height: 100vh;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+
+        .navbar {
+            display: flex;
+            height: 45px;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #E5E5E0;
+            padding: 15px 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .navbar-brand {
+            font-size: 22px;
+            font-weight: normal;
+            text-align: center;
+            flex: 1;
+        }
+
+        .navbar-left, .navbar-right {
+            flex: 1;
+        }
+
+        .navbar-right {
+            display: flex;
+            justify-content: flex-end;
+            gap: 20px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #000;
+            font-size: 18px;
+            position: relative;
+        }
+
+        .bag-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: #000;
+            color: #fff;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .bag-container {
+            display: flex;
+            margin-left: 100px;
+            justify-content: space-between;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .cart-items {
+            width: 50%;
+        }
+
+        .cart-item {
+            display: flex; 
+            height: 155px;
+            background-color: #E5E5E0;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .cart-item-image {
+            width: 100px;
+            height: 125px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+
+        .cart-item-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .cart-item-title {
+            font-size: 24px;
+            font-weight: normal;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-quantity {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            position: absolute;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+        }
+
+        .remove-item {
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .order-summary {
+            width: 35%;
+        }
+
+        .summary-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            margin-left: 65px;
+        }
+
+        .summary-row {
+            width: 75%;
+            display: flex;
+            justify-content: space-between;
+            background-color: #E5E5E0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .summary-label {
+            font-size: 16px;
+        }
+
+        .summary-value {
+            font-size: 16px;
+        }
+
+        .checkout-btn {
+            background-color: #000;
+            color: #fff;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            width: 75%;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .checkout-btn:hover {
+            background-color: #333;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 50px;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .footer-link {
+            text-decoration: none;
+            color: #000;
+            font-size: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .navbar-right {
+                justify-content: center;
+            }
+
+            .bag-container {
+                flex-direction: column;
+            }
+
+            .cart-items, .order-summary {
+                width: 100%;
+            }
+
+            .cart-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding-bottom: 50px;
+            }
+
+            .cart-item-image {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+
+            .cart-item-price {
+                position: absolute;
+                right: auto;
+                bottom: 15px;
+                top: auto;
+                transform: none;
+            }
+
+            .remove-item {
+                top: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="index.html" class="nav-link">Services</a>
+        </div>
+        <div class="navbar-brand">
+            MM. Leather Services
+        </div>
+        <div class="navbar-right">
+            <a href="AccountLogin.html" class="nav-link">Account</a>
+        </div>
+    </nav>
+
+    <div class="bag-container">
+        <div class="cart-items" id="cart-items-container">
+        </div>
+
+        <div class="order-summary">
+            <h2 class="summary-title">ORDER SUMMARY</h2>
+            
+            <div class="summary-row">
+                <span class="summary-label">Payment Method</span>
+                <span class="summary-value"></span>
+            </div>
+            
+            <div class="summary-row">
+                <span class="summary-label">Price:</span>
+                <span class="summary-value" id="summary-price">0php</span>
+            </div>
+            
+            <div class="summary-row">
+                <span class="summary-label">Shipping:</span>
+                <span class="summary-value">Paid</span>
+            </div>
+            
+            <div class="summary-row">
+                <span class="summary-label">Coupon:</span>
+                <span class="summary-value">None</span>
+            </div>
+            
+            <div class="summary-row">
+                <span class="summary-label">Total:</span>
+                <span class="summary-value" id="summary-total">0php</span>
+            </div>
+            
+            <button class="checkout-btn" onclick="window.location.href='SuccessCheckout.html'">CHECK OUT</button>
+
+        </div>
+    </div>
+
+    <footer class="footer">
+        <a href="#" class="footer-link">ABOUT</a>
+        <a href="#" class="footer-link">CONTACT</a>
+        <a href="#" class="footer-link">SOCIALS</a>
+        <a href="#" class="footer-link">FAQs</a>
+    </footer>
+
+    <script>
+        function updateBagCount() {
+            const bagCountElement = document.getElementById('bag-count');
+            const cart = JSON.parse(localStorage.getItem('mmLeatherCart')) || [];
+            
+            let totalItems = 0;
+            cart.forEach(item => {
+                totalItems += item.quantity;
+            });
+            
+            if (totalItems > 0) {
+                bagCountElement.textContent = totalItems;
+                bagCountElement.style.display = 'flex';
+            } else {
+                bagCountElement.style.display = 'none';
+            }
+        }
+        
+        function loadCartItems() {
+            const cartItemsContainer = document.getElementById('cart-items-container');
+            const cart = JSON.parse(localStorage.getItem('mmLeatherCart')) || [];
+            
+            cartItemsContainer.innerHTML = '';
+            
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p style="text-align: center; padding: 20px;">Your bag is empty</p>';
+                updateOrderSummary();
+                return;
+            }
+            
+            cart.forEach((item, index) => {
+                const cartItemElement = document.createElement('div');
+                cartItemElement.className = 'cart-item';
+                cartItemElement.innerHTML = `
+                    <img src="${item.imageSrc}" alt="${item.title}" class="cart-item-image">
+                    <div class="cart-item-details">
+                        <h2 class="cart-item-title">${item.title}</h2>
+                        <p class="cart-item-quantity">Quantity: ${item.quantity}</p>
+                    </div>
+                    <p class="cart-item-price">${item.price * item.quantity}php</p>
+                    <button class="remove-item" data-index="${index}">x</button>
+                `;
+                cartItemsContainer.appendChild(cartItemElement);
+            });
+            
+            document.querySelectorAll('.remove-item').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = this.getAttribute('data-index');
+                    removeCartItem(index);
+                });
+            });
+            
+            updateOrderSummary();
+        }
+        
+        function removeCartItem(index) {
+            let cart = JSON.parse(localStorage.getItem('mmLeatherCart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('mmLeatherCart', JSON.stringify(cart));
+            loadCartItems();
+            updateBagCount();
+        }
+        
+        function updateOrderSummary() {
+            const cart = JSON.parse(localStorage.getItem('mmLeatherCart')) || [];
+            let total = 0;
+            
+            cart.forEach(item => {
+                total += item.price * item.quantity;
+            });
+            
+            document.getElementById('summary-price').textContent = total + 'php';
+            document.getElementById('summary-total').textContent = total + 'php';
+        }
+        
+        window.addEventListener('DOMContentLoaded', function() {
+            loadCartItems();
+            updateBagCount();
+        });
+    </script>
+</body>
+</html>

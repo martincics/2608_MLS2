@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MM. Leather Services</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    body {
+      background-color: #F7F7F2;
+      color: #000;
+      height: 400px;
+      padding: 15px;
+    }
+
+    .navbar {
+      display: flex;
+      height: 45px;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #E5E5E0;
+      padding: 15px 30px;
+      border-radius: 15px;
+      margin: 0 auto 15px;
+      max-width: 1350px;
+    }
+
+    .page-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .navbar-brand {
+      font-size: 22px;
+      text-align: center;
+      flex: 1;
+    }
+
+    .navbar-left, .navbar-right {
+      flex: 1;
+    }
+
+    .navbar-right {
+      display: flex;
+      justify-content: flex-end;
+      gap: 20px;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: #000;
+      font-size: 18px;
+      position: relative;
+    }
+
+    .bag-count {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background-color: #000;
+      color: #fff;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    .main-content {
+      position: relative;
+      width: 100%;
+      height: 500px;
+      margin: 0 auto 15px;
+      border-radius: 30px;
+      overflow: hidden;
+      padding-bottom: 200px; 
+    }
+
+    .main-content::before {
+      border-radius: 10px;
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('Atelier.png');
+      background-size: 100%;
+      background-position: top;
+      background-repeat: no-repeat;
+      z-index: -1;
+      opacity: 0.6;
+    }
+
+    .services-title {
+      position: absolute;
+      top: 50px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 72px;
+      font-weight: normal;
+      color: #ffffa0;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    .service-cards {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 250px;
+      flex-wrap: wrap;
+    }
+
+    .service-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 250px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .service-link {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .service-image-wrapper {
+      position: relative;
+      width: 78%;
+      height: 280px;
+      border-radius: 15px;
+      overflow: hidden;
+      top: -50px;
+      margin-bottom: 15px;
+    }
+
+    .service-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.3s ease;
+      display: block;
+    }
+
+    .service-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 15px;
+      transition: 0.3s ease;
+    }
+
+    .service-overlay h2 {
+      color: #fff;
+      font-size: 24px;
+      font-weight: normal;
+      text-align: center;
+    }
+
+    .service-image-wrapper:hover .service-overlay {
+      opacity: 1;
+    }
+
+    .service-image-wrapper:hover .service-image {
+      filter: brightness(70%);
+    }
+
+    .footer {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 50px;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    .footer-link {
+      text-decoration: none;
+      color: #000;
+      font-size: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .navbar-right {
+        justify-content: center;
+      }
+
+      .service-cards {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+        gap: 20px;
+      }
+
+      .service-card {
+        width: 80%;
+        margin-bottom: 20px;
+      }
+
+      .main-content {
+        height: auto;
+        padding-bottom: 30px;
+        background-size: 100%;
+      }
+
+      .services-title {
+        position: relative;
+        top: 30px;
+        margin-bottom: 50px;
+      }
+
+      .footer {
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .page-container {
+        margin: 0 15px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  
+  <nav class="navbar">
+    <div class="navbar-left"></div>
+    <div class="navbar-brand">MM. Leather Services</div>
+    <div class="navbar-right">
+      <a href="AccountLogin.html" class="nav-link">Account</a>
+      <a href="Bag.html" class="nav-link" id="bag-link">Bag<span class="bag-count" id="bag-count"></span></a>
+    </div>
+  </nav>
+
+  <div class="page-container">
+    <div class="main-content">
+      <h1 class="services-title">Our Services:</h1>
+      <div class="service-cards">
+
+        <div class="service-card">
+          <a href="Polish.html" class="service-link">
+            <div class="service-image-wrapper">
+              <img src="service1.png" alt="Polish service" class="service-image" />
+              <div class="service-overlay">
+                <h2 class="service-name">Polish</h2>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="service-card">
+          <a href="Sewing.html" class="service-link">
+            <div class="service-image-wrapper">
+              <img src="service2.png" alt="Sewing service" class="service-image" />
+              <div class="service-overlay">
+                <h2 class="service-name">Sewing</h2>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="service-card">
+          <a href="Sole.html" class="service-link">
+            <div class="service-image-wrapper">
+              <img src="service3.png" alt="Sole Replacement service" class="service-image" />
+              <div class="service-overlay">
+                <h2 class="service-name">Sole Replacement</h2>
+              </div>
+            </div>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <a href="#" class="footer-link">ABOUT</a>
+    <a href="#" class="footer-link">CONTACT</a>
+    <a href="#" class="footer-link">SOCIALS</a>
+    <a href="#" class="footer-link">FAQs</a>
+  </footer>
+
+  <script>
+    function updateBagCount() {
+      const bagCountElement = document.getElementById('bag-count');
+      const cart = JSON.parse(localStorage.getItem('mmLeatherCart')) || [];
+
+      let totalItems = 0;
+      cart.forEach(item => {
+        totalItems += item.quantity;
+      });
+
+      if (totalItems > 0) {
+        bagCountElement.textContent = totalItems;
+        bagCountElement.style.display = 'flex';
+      } else {
+        bagCountElement.style.display = 'none';
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', updateBagCount);
+    window.addEventListener('storage', updateBagCount);
+  </script>
+</body>
+</html>

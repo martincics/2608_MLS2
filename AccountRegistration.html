@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Registration</title>
+    <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+body {
+  background-color: #F7F7F2;
+  color: #000;
+  min-height: 100vh;
+  margin: 0;
+  padding: 15px;
+}
+
+.navbar {
+  display: flex;
+  height: 45px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #E5E5E0;
+  padding: 15px 30px;
+  border-radius: 15px;
+  margin: 0 auto 15px;
+  max-width: 1350px;
+}
+
+.page-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.navbar-brand {
+  font-size: 22px;
+  text-align: center;
+  flex: 1;
+}
+
+.navbar-left, .navbar-right {
+  flex: 1;
+}
+
+.navbar-right {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #000;
+  font-size: 18px;
+  position: relative;
+}
+
+.bag-count {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: #000;
+  color: #fff;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+.profile-section {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.profile-label {
+  font-size: 14px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.register-title {
+  font-size: 24px;
+  font-weight: normal;
+}
+
+.register-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-row {
+  display: flex;
+  gap: 15px;
+}
+
+.form-group {
+  flex: 1;
+}
+
+.form-control {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 12px;
+  border: none;
+  background-color: #E5E5E0;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.register-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 15px;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .navbar-right {
+    justify-content: center;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .page-container {
+    margin: 0 15px;
+  }
+}
+    </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-left">
+      <a href="index.html" class="nav-link">Services</a>
+    </div>
+    <div class="navbar-brand">
+      MM. Leather Services
+    </div>
+    <div class="navbar-right">
+      <a href="Bag.html" class="nav-link" id="bag-link">Bag<span class="bag-count" id="bag-count"></span></a>
+    </div>
+  </nav>
+
+  <div class="page-container">
+    <div class="profile-section">
+      <p class="profile-label">PROFILE</p>
+      <h1 class="register-title">Create Account</h1>
+    </div>
+
+    <form class="register-form" id="register-form">
+      <div class="form-row">
+        <div class="form-group">
+          <input type="text" class="form-control" id="first-name" placeholder="First Name*" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="last-name" placeholder="Last Name*" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <input type="text" class="form-control" id="gender" placeholder="Gender*" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="dob" placeholder="Date of Birth*" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <input type="tel" class="form-control" id="phone" placeholder="Phone*" required>
+        </div>
+        <div class="form-group">
+          <input type="tel" class="form-control" id="landline" placeholder="Landline">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <input type="text" class="form-control" id="city" placeholder="City*" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="postcode" placeholder="Postcode*" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" id="address" placeholder="Full Address*" required>
+      </div>
+      <div class="form-group">
+        <input type="email" class="form-control" id="email" placeholder="Email*" required>
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" id="password" placeholder="Password*" required>
+      </div>
+      <button type="submit" class="register-btn">CREATE ACCOUNT</button>
+    </form>
+  </div>
+
+  <script>
+    function updateBagCount() {
+      const bagCountElement = document.getElementById('bag-count');
+      const cart = JSON.parse(localStorage.getItem('mmLeatherCart')) || [];
+      let totalItems = 0;
+      cart.forEach(item => {
+        totalItems += item.quantity;
+      });
+      if (totalItems > 0) {
+        bagCountElement.textContent = totalItems;
+        bagCountElement.style.display = 'flex';
+      } else {
+        bagCountElement.style.display = 'none';
+      }
+    }
+
+    document.getElementById('register-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const userData = {
+        firstName: document.getElementById('first-name').value,
+        lastName: document.getElementById('last-name').value,
+        gender: document.getElementById('gender').value,
+        dob: document.getElementById('dob').value,
+        phone: document.getElementById('phone').value,
+        landline: document.getElementById('landline').value,
+        city: document.getElementById('city').value,
+        postcode: document.getElementById('postcode').value,
+        address: document.getElementById('address').value,
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value,
+        registrationDate: new Date().toISOString()
+      };
+      const users = JSON.parse(localStorage.getItem('mmLeatherUsers')) || [];
+      const emailExists = users.some(user => user.email === userData.email);
+      if (emailExists) {
+        alert('An account with this email already exists. Please use a different email or log in.');
+        return;
+      }
+      users.push(userData);
+      localStorage.setItem('mmLeatherUsers', JSON.stringify(users));
+      const currentUser = {
+        email: userData.email,
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        loggedIn: true
+      };
+      localStorage.setItem('mmLeatherCurrentUser', JSON.stringify(currentUser));
+      alert('Account created successfully!');
+      window.location.href = 'AccountCreationSuccess.html';
+    });
+
+    window.addEventListener('DOMContentLoaded', updateBagCount);
+    window.addEventListener('storage', updateBagCount);
+  </script>
+</body>
+</html>
